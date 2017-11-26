@@ -11,17 +11,26 @@ YouTubeSearch({key: API_KEY, term: 'ron swanson'}, data => console.log(data));
 class App extends Component {
   constructor(props){
     super(props)
-    this.state = {videos: []};
+    this.state = {
+    	videos: [],
+    	selectedVideo: null
+    };
     // do initial fetch of data
-    YouTubeSearch({key: API_KEY, term: 'ron swanson'}, videos => this.setState({ videos }));
+    YouTubeSearch({key: API_KEY, term: 'ron swanson'}, videos => this.setState({ 
+    	videos: videos,
+    	selectedVideo: videos[0] 
+    }));
   }
 
   render(){
     return (
       <div>
         <SearchBar />
-        <VideoDetail video={this.state.videos[0]} />
-        <VideoList videos={this.state.videos} />
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+        onVideoSelect={ selectedVideo => this.setState({selectedVideo}) } 
+        videos={this.state.videos} 
+        />
       </div>
     );
   }
