@@ -1,9 +1,14 @@
 import React from 'react';
-import VideoDetail from './video_detail';
+// import VideoDetail from './video_detail';
 
 const VideoDetail = ({video}) => {
+
+	if(!video) {
+		return <div>Loading..</div>
+	}
+	
   const videoId = video.id.videoId;
-const url = `http://youtube.com/embed/${videoId}`;
+	const url = `http://youtube.com/embed/${videoId}`;
 
   return (
     <div className="video-detail col-md-8">
